@@ -141,8 +141,8 @@ class Task  extends Model
     {
         $stmt = $this->pdo->prepare("UPDATE  task SET `name` = :new_name, `to_do_at` = :new_date WHERE id = :id ");
         $stmt->execute([
-            "new_name" => ,
-            "new_date" => ,
+            "new_name" => $_POST['name'],
+            "new_date" => $_POST['date'],
             "id" => $this->id
         ]);
         return $stmt->fetch();
