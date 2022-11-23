@@ -95,6 +95,19 @@ class Task  extends Model
     }
 
     /**
+     * Récupérer une tache avec son id
+     * @param int $id
+     * @return array|false
+     */
+    public function getTaskById(int $id) : array|false
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM user WHERE id = :id ");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+    /**
      * Ajouter une tache dans la bdd
      * @return void
      */
@@ -124,7 +137,16 @@ class Task  extends Model
      * Editer une tache en la trouvant avec son id
      * 
      */
-    
+    public function edit(int $id) : self|false
+    {
+        $stmt = $this->pdo->prepare("UPDATE  task SET `name` = :new_name, `to_do_at` = :new_date WHERE id = :id ");
+        $stmt->execute([
+            "new_name" => ,
+            "new_date" => ,
+            "id" => $this->id
+        ]);
+        return $stmt->fetch();
+    }
 
     /**
      * Déclarer une tache comme faite
